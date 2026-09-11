@@ -2,8 +2,8 @@
 
 /*
   Блок 13 «Подвал». Референс: docs/refs/block-13-footer.png (страница 1440 → 1 css px = 1.749 px картинки).
-  Композиция 1-в-1: фоновая фактура во весь блок (в референсе красный шёлк — ждём ассет, пока bg-olive
-  с мягким радиальным градиентом), по центру заголовок антиквой капслоком в 3 строки (капитель 62px, шаг строки 84),
+  Композиция 1-в-1: фоновая фактура во весь блок (в референсе красный шёлк — ждём ассет, пока bg-black
+  с мягким радиальным градиентом — унификация стиля, зелёный убран), по центру заголовок антиквой капслоком в 3 строки (капитель 62px, шаг строки 84),
   ниже три колонки на отступах 9.6%: соцсети подчёркнутыми ссылками (шаг 44.6) / телефон и почта по центру (шаг 44.6) /
   навигация справа (шаг 33). Внизу по центру кнопка 229×63 с обводкой 1px без заливки. Добавлена строка © (по заданию).
 */
@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <footer
       id="contacts"
-      className="relative scroll-mt-20 overflow-hidden bg-olive pt-[28px] pb-[24px] text-paper md:pt-[19px]"
+      className="relative scroll-mt-20 overflow-hidden bg-black pt-[28px] pb-[24px] text-paper md:pt-[19px]"
     >
       {/* TODO: ассет «фон подвала» — фактура во весь блок (в референсе красный шёлк). Пока плейсхолдер-градиент. */}
       <div
@@ -28,7 +28,7 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 35%, var(--color-olive-2) 0%, var(--color-olive) 62%, #171c0d 100%)",
+            "radial-gradient(120% 90% at 50% 35%, var(--color-black-2) 0%, var(--color-black) 62%, #000000 100%)",
         }}
       />
       <span
@@ -55,13 +55,8 @@ export default function Footer() {
             ))}
           </ul>
 
-          <div className="flex flex-col items-center gap-[22px] text-center">
-            <a href={`tel:${footer.phone.replace(/[^\d+]/g, "")}`} className="text-paper transition-opacity hover:opacity-70">
-              {footer.phone}
-            </a>
-            <a href={`mailto:${footer.email}`} className="text-paper transition-opacity hover:opacity-70">
-              {footer.email}
-            </a>
+          <div className="max-w-[280px] text-center text-[13px] leading-[1.3] text-paper-2">
+            {footer.requisites}
           </div>
 
           <nav aria-label="Навигация в подвале">
@@ -81,7 +76,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={open}
-            className="inline-flex h-[56px] w-[229px] cursor-pointer items-center justify-center border border-paper bg-transparent text-[16px] leading-none text-paper transition-colors hover:bg-paper hover:text-olive md:h-[63px]"
+            className="inline-flex h-[56px] w-[229px] cursor-pointer items-center justify-center border border-paper bg-transparent text-[16px] leading-none text-paper transition-colors hover:bg-paper hover:text-black md:h-[63px]"
           >
             {footer.button}
           </button>

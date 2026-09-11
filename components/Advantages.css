@@ -29,8 +29,8 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* штрих референса #393F2D на #212715 → butter 13% поверх olive */
-  stroke: color-mix(in srgb, var(--color-butter) 13%, transparent);
+  /* секция переведена с оливкового на чёрный (унификация стиля) — штрих paper 13% поверх black */
+  stroke: color-mix(in srgb, var(--color-paper) 13%, transparent);
   stroke-width: 1px;
   fill: none;
 }

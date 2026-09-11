@@ -3,7 +3,7 @@
 /*
   Блок 9 «Преимущества». Референс: docs/refs/block-09-advantages.png
   (страница референса 1269 css-px, панель 1253×474; размеры пересчитаны на 1440: ref × 1.138).
-  Композиция: тёмно-оливковая панель, фоном «аудио-волна» из штрихов (снята с референса
+  Композиция: тёмная панель (унифицирована с чёрными секциями сайта), фоном «аудио-волна» из штрихов (снята с референса
   попиксельно — components/advantages-wave.ts), пункты в две «строки» шахматкой.
   Поведение: секция закрепляется, дорожка едет влево при скролле вниз (GSAP ScrollTrigger pin,
   ход = ширина дорожки − ширина экрана). На <768px и при prefers-reduced-motion — обычная сетка.
@@ -80,7 +80,7 @@ export default function Advantages() {
   const trackViewBox = `0 0 ${Math.round(WAVE_W * TRACK)} ${WAVE_H}`;
 
   return (
-    <section id="advantages" ref={section} className="adv scroll-mt-20 bg-olive text-butter">
+    <section id="advantages" ref={section} className="adv scroll-mt-20 bg-black text-paper">
       {/* Волна один раз в defs, ниже — два <use> для десктопа и мобилки */}
       <svg width="0" height="0" aria-hidden="true" className="absolute">
         <defs>

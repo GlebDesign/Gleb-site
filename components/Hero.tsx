@@ -8,6 +8,7 @@
   Замеры референса: страница 2534px @2x → коэффициент к 1440 = 0.568.
 */
 
+import Image from "next/image";
 import Reveal from "./Reveal";
 import { useLeadModal } from "./LeadModal";
 import { hero, nav, TG_URL } from "@/lib/data";
@@ -22,8 +23,14 @@ export default function Hero() {
     >
       {/* Фото: отступ слева 24px (1.66%), сверху 10px, до низа экрана; на мобиле 4:5 */}
       <div className="relative aspect-[4/5] md:aspect-auto md:ml-[1.667vw] md:mt-[10px] md:min-h-0">
-        {/* TODO: фото Глеба — заменить плейсхолдер на next/image (object-cover) */}
-        <div className="ph h-full w-full" data-label="TODO: фото Глеба" />
+        <Image
+          src="/photos/gleb-hero.jpg"
+          alt={hero.photoCaption}
+          fill
+          priority
+          sizes="(min-width: 768px) 49vw, 100vw"
+          className="h-full w-full object-cover"
+        />
         {/* Надпись поверх фото — как «ANNA MIHU»: капитель 83px при 1440, слева 26px, сверху 24px */}
         <div
           className="pointer-events-none absolute left-[3.8%] top-[2.9%] font-serif font-normal leading-none tracking-[-0.04em] text-paper md:left-[21px] md:top-[calc(24px-0.14em)] md:text-[7.7vw] text-[15.5vw] whitespace-nowrap"

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, Playfair_Display } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -8,15 +8,10 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const onest = Onest({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-onest",
-});
-
+/* Единый шрифт всего сайта — Playfair Display (по правке клиента). */
 const serif = Playfair_Display({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-serif-display",
 });
@@ -36,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${onest.variable} ${serif.variable}`}>
+    <html lang="ru" className={serif.variable}>
       <body>
         <SmoothScroll>{children}</SmoothScroll>
       </body>

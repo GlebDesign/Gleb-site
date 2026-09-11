@@ -2,37 +2,35 @@
 
 /*
   ДИЗАЙН-ТОКЕНЫ — единственный источник стилей для всех блоков.
-  Значения сняты пипеткой с референса-франкенштейна (docs/refs/*.png).
-  Акцент и оливковый — допущение до брендбука клиента, меняются только здесь.
+  Унификация стиля (правка клиента, 2026): один шрифт (Playfair Display) на весь сайт,
+  один оттенок оранжевого (deep/soft — производные того же тона через color-mix,
+  не отдельные цвета), зелёный/оливковый убран — тёмные секции теперь на --color-black.
 */
 @theme {
   /* Фоны */
   --color-cream: #efede5;      /* панель первого экрана, светлые блоки 6/8 */
   --color-cream-2: #f4f2ec;    /* карточки на светлом */
   --color-sand: #f3e9cf;       /* фон блока кейсов (gm-web) */
-  --color-black: #0a0a0a;      /* блоки 2/3/10/12 */
+  --color-black: #0a0a0a;      /* все тёмные секции (2/3/7/9/10/12/13) */
   --color-black-2: #141414;    /* карточки на чёрном */
-  --color-olive: #1f2612;      /* блоки 7/9 */
-  --color-olive-2: #2a3319;
 
   /* Текст */
   --color-ink: #111111;
   --color-ink-2: #5a5a55;
   --color-paper: #f4f2ec;      /* текст на тёмном */
   --color-paper-2: rgba(244, 242, 236, 0.62);
-  --color-butter: #f1e8b6;     /* бледно-жёлтый текст на оливковом */
 
-  /* Акцент */
-  --color-accent: #d9713a;     /* терракота (gm-web) */
-  --color-accent-deep: #b8582a;
-  --color-accent-soft: #f0c090;
+  /* Акцент — один оттенок, deep/soft это производные того же тона */
+  --color-accent: #d9713a;     /* терракота — единственный оранжевый бренда */
+  --color-accent-deep: color-mix(in srgb, var(--color-accent) 82%, black);
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 38%, white);
 
   /* Линии */
   --color-line: rgba(17, 17, 17, 0.14);
   --color-line-dark: rgba(244, 242, 236, 0.16);
 
-  /* Шрифты */
-  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  /* Шрифты — единый Playfair Display на весь сайт (font-sans = font-serif) */
+  --font-sans: var(--font-serif-display), "Times New Roman", Georgia, serif;
   --font-serif: var(--font-serif-display), "Times New Roman", Georgia, serif;
 
   /* Радиусы */

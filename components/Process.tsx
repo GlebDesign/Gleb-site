@@ -8,7 +8,7 @@
 */
 
 import Reveal from "./Reveal";
-import { process } from "@/lib/data";
+import { process, TG_URL } from "@/lib/data";
 import "./Process.css";
 
 export default function Process() {
@@ -45,6 +45,12 @@ export default function Process() {
             );
           })}
         </ol>
+
+        <p className="pc-more">
+          <a href={TG_URL} target="_blank" rel="noopener noreferrer">
+            {process.more}
+          </a>
+        </p>
       </div>
     </section>
   );
