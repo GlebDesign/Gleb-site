@@ -1,0 +1,84 @@
+/*
+  Блок 2 «С чем ко мне приходят чаще всего».
+  Значения сняты с docs/refs/block-02-problems.png (страница референса 1265 css-px,
+  пересчитано на макетную ширину 1440: ref px × 0.569).
+*/
+
+/* Заголовок: гротеск, 3 строки по центру */
+.pr-title {
+  font-size: 58px;            /* x-height 31px, шаг строки 57px — как в референсе */
+  line-height: 0.98;
+  font-weight: 500;           /* стемы референса 0.115em — между 500 и 600, ближе к 500 */
+  max-width: 560px;
+  margin-inline: auto;
+  text-align: center;
+  text-wrap: initial;
+}
+
+/* «Маркер»: подсвеченная плашка с антиквой внутри, размытая, с ореолом */
+.pr-hl {
+  display: inline-block;
+  padding: 0 0.1em;
+  margin-inline: -0.02em;
+  border-radius: 0.1em;
+  line-height: 0.83;          /* высота плашки 48px */
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  background: var(--color-accent-soft);
+  box-shadow: 0 0 22px 3px color-mix(in srgb, var(--color-accent-soft) 42%, transparent);
+  filter: blur(1.4px);
+}
+
+/* Колонка: тонкая линия слева, номер, иконка, антиква, серый текст */
+.pr-col {
+  border-left: 1px solid var(--color-line-dark);
+  padding: 13px 16px 0 12px;
+}
+.pr-num {
+  display: block;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--color-paper) 45%, transparent);
+}
+.pr-icon {
+  display: block;
+  width: 96px;
+  height: 78px;
+  margin-top: 28px;
+  color: var(--color-accent-soft);
+}
+.pr-icon * {
+  vector-effect: non-scaling-stroke;
+}
+.pr-h {
+  margin-top: 25px;
+  font-size: 37px;
+  max-width: 280px;
+  text-wrap: initial;
+}
+.pr-text {
+  margin-top: 12px;
+  max-width: 272px;
+  font-size: 14px;
+  line-height: 1.15;
+  color: var(--color-paper-2);
+}
+
+@media (max-width: 1023px) {
+  .pr-title { font-size: 48px; max-width: 440px; }
+  .pr-h { font-size: 32px; max-width: none; }
+  .pr-text { max-width: 320px; }
+}
+
+@media (max-width: 767px) {
+  .pr-title { font-size: 38px; max-width: 335px; }
+  .pr-hl { filter: blur(1px); box-shadow: 0 0 16px 2px color-mix(in srgb, var(--color-accent-soft) 42%, transparent); }
+  .pr-col { padding: 10px 12px 0 12px; }
+  .pr-icon { width: 80px; height: 65px; margin-top: 22px; }
+  .pr-h { margin-top: 20px; font-size: 30px; max-width: 300px; }
+  .pr-text { margin-top: 10px; max-width: 300px; }
+}

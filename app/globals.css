@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/*
+  ДИЗАЙН-ТОКЕНЫ — единственный источник стилей для всех блоков.
+  Значения сняты пипеткой с референса-франкенштейна (docs/refs/*.png).
+  Акцент и оливковый — допущение до брендбука клиента, меняются только здесь.
+*/
+@theme {
+  /* Фоны */
+  --color-cream: #efede5;      /* панель первого экрана, светлые блоки 6/8 */
+  --color-cream-2: #f4f2ec;    /* карточки на светлом */
+  --color-sand: #f3e9cf;       /* фон блока кейсов (gm-web) */
+  --color-black: #0a0a0a;      /* блоки 2/3/10/12 */
+  --color-black-2: #141414;    /* карточки на чёрном */
+  --color-olive: #1f2612;      /* блоки 7/9 */
+  --color-olive-2: #2a3319;
+
+  /* Текст */
+  --color-ink: #111111;
+  --color-ink-2: #5a5a55;
+  --color-paper: #f4f2ec;      /* текст на тёмном */
+  --color-paper-2: rgba(244, 242, 236, 0.62);
+  --color-butter: #f1e8b6;     /* бледно-жёлтый текст на оливковом */
+
+  /* Акцент */
+  --color-accent: #d9713a;     /* терракота (gm-web) */
+  --color-accent-deep: #b8582a;
+  --color-accent-soft: #f0c090;
+
+  /* Линии */
+  --color-line: rgba(17, 17, 17, 0.14);
+  --color-line-dark: rgba(244, 242, 236, 0.16);
+
+  /* Шрифты */
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-display), "Times New Roman", Georgia, serif;
+
+  /* Радиусы */
+  --radius-card: 20px;
+  --radius-big: 28px;
+  --radius-pill: 999px;
+}
+
+html {
+  background: var(--color-cream);
+  scrollbar-width: thin;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection { background: rgba(217, 113, 58, 0.25); }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Служебный лейбл */
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+}
+
+/* Заголовок-антиква (блоки 1, 6, 8, 12, 13) */
+.h-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Заголовок-гротеск (блоки 2, 7, 9, 10) */
+.h-sans {
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+/* Контейнер */
+.wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1360px;
+  padding-inline: 20px;
+}
+@media (min-width: 768px) {
+  .wrap { padding-inline: 40px; }
+}
+
+/* Плейсхолдер под ассет (фото, скриншот, видео) */
+.ph {
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg, rgba(0,0,0,0.06) 0 12px, transparent 12px 24px),
+    #dcd9cf;
+}
+.ph::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+}
+.ph-dark {
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 12px, transparent 12px 24px),
+    #23261c;
+}
+.ph-dark::after { color: rgba(255,255,255,0.5); }
