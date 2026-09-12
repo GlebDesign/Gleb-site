@@ -53,30 +53,46 @@ export default function Advantages() {
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-        const vp = viewport.current!;
-        const tr = track.current!;
-        const travel = () => Math.max(0, tr.scrollWidth - vp.clientWidth);
-        gsap.to(tr, {
-          x: () => -travel(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: section.current,
-            pin: true,
-            scrub: true,
-            start: "center center",
-            end: () => "+=" + travel(),
-            invalidateOnRefresh: true,
-            anticipatePin: 1,
-          },
+      /*
+        Баг (реальная причина, не просто поздняя картинка): useGSAP монтируется как layout-effect
+        (синхронно, до отрисовки), а у блока «Результат» (Results.tsx) — обычный useEffect
+        (после отрисовки). React гарантирует, что ВСЕ layout-эффекты дерева отрабатывают раньше
+        ЛЮБЫХ passive-эффектов — значит на момент расчёта "center center" здесь спейсер пина
+        Results ещё не вставлен в документ, высота страницы занижена на его PIN_DISTANCE,
+        и триггер закрепления считается на ~3200px раньше своего места (наезжает на блок цены).
+        Фикс: откладываем создание пина на один кадр — к этому моменту passive-эффект
+        Results уже отработал и его спейсер учтён в высоте документа.
+      */
+      let mm: ReturnType<typeof gsap.matchMedia> | null = null;
+      const raf = requestAnimationFrame(() => {
+        mm = gsap.matchMedia();
+        mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+          const vp = viewport.current!;
+          const tr = track.current!;
+          const travel = () => Math.max(0, tr.scrollWidth - vp.clientWidth);
+          gsap.to(tr, {
+            x: () => -travel(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: section.current,
+              pin: true,
+              scrub: true,
+              start: "center center",
+              end: () => "+=" + travel(),
+              invalidateOnRefresh: true,
+              anticipatePin: 1,
+            },
+          });
         });
       });
-      return () => mm.revert();
+      return () => {
+        cancelAnimationFrame(raf);
+        mm?.revert();
+      };
     },
     { scope: section },
   );
-  // Фикс на позднюю догрузку картинок (кейсы/фото сдвигают разметку) — см. SmoothScroll.tsx
+  // Доп. страховка на позднюю догрузку картинок (кейсы/фото сдвигают разметку) — см. SmoothScroll.tsx
 
   const trackViewBox = `0 0 ${Math.round(WAVE_W * TRACK)} ${WAVE_H}`;
 

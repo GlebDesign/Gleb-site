@@ -36,6 +36,7 @@
   flex-direction: column;
   aspect-ratio: 595 / 472;
   padding: 14px 14px 12px;
+  overflow: hidden;
   background: var(--color-cream);
   color: var(--color-ink);
 }
@@ -48,6 +49,7 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
   text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 
 /* Подтекст: снизу слева (клиент), не наезжает на стрелку */

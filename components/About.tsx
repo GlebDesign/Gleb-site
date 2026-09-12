@@ -45,8 +45,10 @@ export default function About() {
           </div>
         </div>
 
-        <Reveal delay={0.1} className="h-full">
-          <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-auto md:h-full md:min-h-[560px]">
+        {/* Отрицательный отступ съедает вертикальный паддинг секции — фото доходит до самого
+            верха и низа блока, а не только до высоты текстовой колонки (правка клиента). */}
+        <Reveal delay={0.1} className="-my-20 md:-my-28">
+          <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-auto md:h-full">
             <Image src="/photos/gleb-about.jpg" alt={about.photoLabel} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
           </div>
         </Reveal>
