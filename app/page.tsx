@@ -10,7 +10,6 @@ import Reviews from "@/components/Reviews";
 import Advantages from "@/components/Advantages";
 import Process from "@/components/Process";
 import Cta2 from "@/components/Cta2";
-import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import LeadModal from "@/components/LeadModal";
 
@@ -31,7 +30,6 @@ export default function Page() {
         <Advantages />  {/* 9 */}
         <Process />     {/* 10 */}
         <Cta2 />        {/* 11 */}
-        <Faq />         {/* 12 */}
       </main>
       <Footer />        {/* 13 */}
       <LeadModal />

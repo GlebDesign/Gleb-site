@@ -40,8 +40,9 @@
   color: var(--color-ink);
 }
 
-/* Заголовок этапа: размер повторяет заголовки колонок блока 2 (Problems) — правка клиента, без капса */
+/* Заголовок этапа: Playfair Display, размер повторяет заголовки колонок блока 2 (Problems) — правка клиента, без капса */
 .pc-h {
+  font-family: var(--font-serif);
   font-size: 26px;
   font-weight: 600;
   line-height: 0.9;

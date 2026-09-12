@@ -66,7 +66,7 @@ export default function Problems() {
           <Reveal>
             <h2 className="h-sans pr-title">
               {before}
-              <span className="pr-hl">{problems.titleAccent}</span>
+              <span className="mark-accent">{problems.titleAccent}</span>
               {after}
             </h2>
           </Reveal>

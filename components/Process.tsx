@@ -17,7 +17,9 @@ export default function Process() {
       <div className="wrap">
         <Reveal>
           <h2 className="h-sans pc-title">
-            {process.title} <span className="text-accent">{process.titleAccent}</span>
+            {process.title}
+            <br />
+            <span className="mark-accent">{process.titleAccent}</span>
           </h2>
         </Reveal>
 

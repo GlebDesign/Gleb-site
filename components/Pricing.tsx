@@ -28,7 +28,7 @@ export default function Pricing() {
         <div className="mt-10 grid gap-4 md:mt-14 md:grid-cols-2">
           {/* Левая: на рынке */}
           <Reveal className="h-full">
-            <article className="flex h-full min-h-[440px] flex-col overflow-hidden rounded-[24px] bg-cream-2 pt-6 text-center md:min-h-[511px] md:rounded-[32px] md:pt-[30px]">
+            <article className="flex h-full min-h-[440px] flex-col overflow-hidden bg-cream-2 pt-6 text-center md:min-h-[511px] md:pt-[30px]">
               <div className="px-5 md:px-8">
                 <span className="label text-ink-2">{marketLabel}</span>
                 <p className={`${numCls} mt-2 flex flex-wrap items-baseline justify-center gap-x-4 gap-y-1`}>
@@ -53,7 +53,7 @@ export default function Pricing() {
 
           {/* Правая: у меня */}
           <Reveal className="h-full" delay={0.08}>
-            <article className="flex h-full min-h-[440px] flex-col overflow-hidden rounded-[24px] bg-accent-soft pt-6 text-center md:min-h-[511px] md:rounded-[32px] md:pt-[30px]">
+            <article className="flex h-full min-h-[440px] flex-col overflow-hidden bg-accent-soft pt-6 text-center md:min-h-[511px] md:pt-[30px]">
               <div className="px-5 md:px-8">
                 <span className="label text-ink/60">{meLabel}</span>
                 <p className={`${numCls} mt-2 flex flex-wrap items-baseline justify-center gap-x-4 gap-y-1`}>

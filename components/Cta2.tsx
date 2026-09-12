@@ -16,7 +16,7 @@ export default function Cta2() {
       className="scroll-mt-20 bg-cream-2 px-5 pt-[64px] pb-[88px] text-center md:pt-[100px] md:pb-[147px]"
     >
       <Reveal>
-        <h2 className="mx-auto max-w-[900px] font-serif text-[25px] leading-[1.2] font-normal tracking-[-0.01em] text-ink md:text-[36px]">
+        <h2 className="mx-auto max-w-[1100px] font-serif text-[clamp(38px,5vw,72px)] leading-[1.02] font-normal tracking-[-0.01em] text-ink">
           {cta2.title}
         </h2>
         <p className="mx-auto mt-[12px] max-w-[520px] text-[15px] leading-[1.4] text-ink-2 md:mt-[16px] md:text-[16px]">

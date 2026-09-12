@@ -45,8 +45,8 @@ export default function About() {
           </div>
         </div>
 
-        <Reveal delay={0.1}>
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-big)] md:aspect-auto md:h-full md:min-h-[420px]">
+        <Reveal delay={0.1} className="h-full">
+          <div className="relative aspect-[4/5] w-full overflow-hidden md:aspect-auto md:h-full md:min-h-[560px]">
             <Image src="/photos/gleb-about.jpg" alt={about.photoLabel} fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
           </div>
         </Reveal>

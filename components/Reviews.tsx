@@ -10,37 +10,37 @@ import { reviews } from "@/lib/data";
 
 function Quote({ item, i }: { item: (typeof reviews.items)[number]; i: number }) {
   return (
-    <Reveal delay={(i % 3) * 0.06} className="h-full">
-      <article className="flex h-full flex-col rounded-[var(--radius-card)] bg-cream-2 p-6 md:p-7">
-        {item.video ? (
-          <div className="mt-1">
-            <video controls preload="none" className="w-full rounded-[calc(var(--radius-card)-8px)] bg-black">
-              <source src="/reviews/video-review.mp4" />
-            </video>
-          </div>
-        ) : item.image ? (
-          // Скрины разных пропорций (от чат-бабла 4:1 до портретного 0.6:1) — object-contain,
-          // чтобы текст отзыва не обрезался по краям ради заполнения рамки.
-          <div className="relative h-[220px] w-full overflow-hidden rounded-[calc(var(--radius-card)-8px)] bg-ink/5">
-            <Image src={item.image} alt={`Отзыв: ${item.name}`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-contain" />
-          </div>
-        ) : (
-          <>
-            <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden className="text-accent">
-              <path
-                d="M0 20V11.6C0 4.6 4.3 0.8 11.2 0L12 3.6C7.8 4.7 6 7.3 6 11.2H11.2V20H0ZM16 20V11.6C16 4.6 20.3 0.8 27.2 0L28 3.6C23.8 4.7 22 7.3 22 11.2H27.2V20H16Z"
-                fill="currentColor"
-              />
-            </svg>
-            <p className="mt-4 flex-1 text-[15px] leading-[1.45] text-ink">{item.text}</p>
-          </>
-        )}
-
-        <div className="mt-6">
-          <p className="font-semibold text-ink">{item.name}</p>
-          {item.role && <p className="mt-0.5 text-[13px] text-ink-2">{item.role}</p>}
+    <Reveal delay={(i % 3) * 0.06} className="mb-4 block break-inside-avoid">
+      {item.video ? (
+        <video controls preload="none" className="w-full bg-black">
+          <source src="/reviews/video-review.mp4" />
+        </video>
+      ) : item.image && item.imageWidth && item.imageHeight ? (
+        // Просто фото скрина в его реальной пропорции — без общей рамки-карточки на все отзывы.
+        <Image
+          src={item.image}
+          alt={`Отзыв: ${item.name}`}
+          width={item.imageWidth}
+          height={item.imageHeight}
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="h-auto w-full"
+        />
+      ) : (
+        <div className="rounded-[var(--radius-card)] bg-cream-2 p-6">
+          <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden className="text-accent">
+            <path
+              d="M0 20V11.6C0 4.6 4.3 0.8 11.2 0L12 3.6C7.8 4.7 6 7.3 6 11.2H11.2V20H0ZM16 20V11.6C16 4.6 20.3 0.8 27.2 0L28 3.6C23.8 4.7 22 7.3 22 11.2H27.2V20H16Z"
+              fill="currentColor"
+            />
+          </svg>
+          <p className="mt-4 text-[15px] leading-[1.45] text-ink">{item.text}</p>
         </div>
-      </article>
+      )}
+
+      <div className="mt-3">
+        <p className="font-semibold text-ink">{item.name}</p>
+        {item.role && <p className="mt-0.5 text-[13px] text-ink-2">{item.role}</p>}
+      </div>
     </Reveal>
   );
 }
@@ -70,7 +70,7 @@ export default function Reviews() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+        <div className="mt-12 columns-1 gap-4 sm:columns-2 md:mt-16 lg:columns-3">
           {reviews.items.map((item, i) => (
             <Quote key={item.name + i} item={item} i={i} />
           ))}
