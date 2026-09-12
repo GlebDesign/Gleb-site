@@ -89,7 +89,7 @@ export default function Results() {
       };
     });
 
-    // после подгрузки шрифтов пересчитать позиции
+    // после подгрузки шрифтов пересчитать позиции (доп. фикс на позднюю догрузку картинок — в SmoothScroll.tsx)
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
 
     return () => {
@@ -111,19 +111,9 @@ export default function Results() {
         <ul className="rs-cards">
           {results.items.map((r, i) => (
             <li key={r.title} className="rs-card">
+              <span className="rs-icon">{ICONS[i]}</span>
               <div>
-                <span className="rs-icon">{ICONS[i]}</span>
-                <p className="rs-label">
-                  {r.label.map((line) => (
-                    <span key={line}>{line}</span>
-                  ))}
-                </p>
-              </div>
-              <div>
-                <h3 className="rs-card-title">
-                  <b>:&nbsp;</b>
-                  {r.title}
-                </h3>
+                <h3 className="rs-card-title">{r.title}</h3>
                 <p className="rs-card-text">{r.text}</p>
               </div>
             </li>

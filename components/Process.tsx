@@ -22,28 +22,19 @@ export default function Process() {
         </Reveal>
 
         <ol className="pc-grid" role="list">
-          {process.steps.map((s, i) => {
-            const [first, ...rest] = s.title.split(" ");
-            return (
-              <li key={s.title} className="pc-cell">
-                <Reveal delay={i * 0.06} className="h-full">
-                  <article className="pc-card">
-                    <h3 className="pc-h">
-                      <span className="whitespace-nowrap">
-                        {first}
-                        <span className="pc-idx">({i + 1})</span>
-                      </span>
-                      {rest.length > 0 && " " + rest.join(" ")}
-                    </h3>
-                    <p className="pc-text">{s.text}</p>
-                    <svg className="pc-arrow" viewBox="0 0 18 18" aria-hidden="true">
-                      <path d="M3 15 15 3M6 3h9v9" />
-                    </svg>
-                  </article>
-                </Reveal>
-              </li>
-            );
-          })}
+          {process.steps.map((s, i) => (
+            <li key={s.title} className="pc-cell">
+              <Reveal delay={i * 0.06} className="h-full">
+                <article className="pc-card">
+                  <h3 className="pc-h">{s.title}</h3>
+                  <p className="pc-text">{s.text}</p>
+                  <svg className="pc-arrow" viewBox="0 0 18 18" aria-hidden="true">
+                    <path d="M3 15 15 3M6 3h9v9" />
+                  </svg>
+                </article>
+              </Reveal>
+            </li>
+          ))}
         </ol>
 
         <p className="pc-more">

@@ -1,8 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
-import { audit } from "@/lib/data";
-import { useLeadModal } from "./LeadModal";
+import { audit, TG_URL } from "@/lib/data";
 
 /*
   Блок 6 «Мягкий призыв». Референс: docs/refs/block-06-cta.png (2x).
@@ -10,12 +9,12 @@ import { useLeadModal } from "./LeadModal";
   текст 18px, интерлиньяж ~1.1, 2 строки; кнопка-пилюля 470×70 с горизонтальным градиентом
   (слева темнее, справа светлее), текст 19px; отступы: заголовок→текст 28, текст→кнопка 63,
   кнопка→низ блока 55. Под кнопкой — тёплое радиальное свечение, центр на нижней кромке блока.
-  Кнопка открывает поп-ап (LeadModal).
+  Кнопка ведёт в Telegram с готовым сообщением (правка клиента — не через форму на сайте).
 */
 
-export default function Audit() {
-  const open = useLeadModal();
+const auditHref = `${TG_URL}?text=${encodeURIComponent(audit.telegramPrefill)}`;
 
+export default function Audit() {
   return (
     <section
       id="audit"
@@ -40,13 +39,14 @@ export default function Audit() {
           <p className="mx-auto mt-5 max-w-[660px] text-[15px] leading-[1.3] text-ink-2 md:mt-7 md:text-[18px] md:leading-[1.15]">
             {audit.text}
           </p>
-          <button
-            type="button"
-            onClick={open}
+          <a
+            href={auditHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-10 inline-flex h-[60px] w-full max-w-[470px] items-center justify-center rounded-full bg-linear-to-r from-accent-deep to-accent px-8 text-[17px] font-medium text-white shadow-[0_10px_30px_-12px_rgba(184,88,42,0.55)] transition-[filter,transform] hover:brightness-105 active:scale-[0.99] md:mt-[63px] md:h-[70px] md:text-[19px]"
           >
             {audit.cta}
-          </button>
+          </a>
           <p className="mt-3 text-[13px] text-ink-2">{audit.ctaNote}</p>
         </Reveal>
       </div>

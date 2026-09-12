@@ -6,11 +6,11 @@ function Card({ c }: { c: CaseItem }) {
   const inner = (
     <>
       {c.image ? (
-        <div className="relative aspect-[16/10] overflow-hidden rounded-[calc(var(--radius-card)-6px)]">
+        <div className="relative aspect-[16/10] overflow-hidden">
           <Image src={c.image} alt={c.client} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
         </div>
       ) : (
-        <div className="ph aspect-[16/10] rounded-[calc(var(--radius-card)-6px)]" data-label="TODO: превью" />
+        <div className="ph aspect-[16/10]" data-label="TODO: превью" />
       )}
       <div className="mt-5">
         <h3 className="text-xl font-semibold leading-snug tracking-tight md:text-2xl">{c.result}</h3>
@@ -28,7 +28,7 @@ function Card({ c }: { c: CaseItem }) {
     </>
   );
   const cls =
-    "flex h-full flex-col rounded-[var(--radius-card)] border border-line bg-bg-2 p-4 transition-colors md:p-5";
+    "flex h-full flex-col border border-line bg-cream-2 p-4 transition-colors md:p-5";
   return c.href ? (
     <a href={c.href} target="_blank" rel="noopener noreferrer" className={`${cls} hover:border-ink/40`}>
       {inner}
@@ -43,7 +43,7 @@ export default function Cases() {
     <section id="cases" className="scroll-mt-20 py-20 md:py-28">
       <div className="wrap">
         <Reveal>
-          <h2 className="h2 max-w-[820px]">{cases.title}</h2>
+          <h2 className="h-serif mx-auto max-w-[820px] text-center text-[clamp(38px,5vw,72px)]">{cases.title}</h2>
         </Reveal>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
           {cases.items.map((c, i) => (

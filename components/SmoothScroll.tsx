@@ -22,6 +22,21 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    /*
+      Баг (замечен клиентом): закреплённые секции (Results, Advantages) считают свои
+      позиции один раз при монтировании. Картинки ниже по странице (кейсы, отзывы, фото)
+      грузятся лениво и сдвигают разметку уже ПОСЛЕ этого расчёта и ПОСЛЕ window.load —
+      секция «застревает» в position:fixed не на своём месте и наезжает на соседние блоки.
+      Фикс: следим за высотой документа и пересчитываем ScrollTrigger при любом её изменении.
+    */
+    let refreshTimer = 0;
+    const refresh = () => {
+      window.clearTimeout(refreshTimer);
+      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+    };
+    const ro = new ResizeObserver(refresh);
+    ro.observe(document.body);
+
     // Якорные ссылки через Lenis
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null;
@@ -37,6 +52,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     return () => {
       document.removeEventListener("click", onClick);
       gsap.ticker.remove(raf);
+      window.clearTimeout(refreshTimer);
+      ro.disconnect();
       lenis.destroy();
     };
   }, []);

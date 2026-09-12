@@ -10,12 +10,9 @@
 
 import Image from "next/image";
 import Reveal from "./Reveal";
-import { useLeadModal } from "./LeadModal";
 import { hero, nav, TG_URL } from "@/lib/data";
 
 export default function Hero() {
-  const open = useLeadModal();
-
   return (
     <section
       id="top"
@@ -87,13 +84,14 @@ export default function Hero() {
           <Reveal delay={0.24}>
             <div className="mt-8 flex flex-col items-center md:mt-[50px]">
               {/* Кнопка по образцу block-01-button-sample: пилюля 56px, паддинг 34px, 16px/600 */}
-              <button
-                type="button"
-                onClick={open}
+              <a
+                href={TG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-accent px-[34px] text-[16px] font-semibold text-white transition-colors hover:bg-accent-deep"
               >
                 {hero.cta}
-              </button>
+              </a>
               <p className="mt-3 max-w-[340px] text-[12px] leading-[1.4] text-ink-2">{hero.ctaNote}</p>
             </div>
           </Reveal>

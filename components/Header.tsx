@@ -7,12 +7,10 @@
 */
 
 import { useEffect, useState } from "react";
-import { nav, hero } from "@/lib/data";
-import { useLeadModal } from "./LeadModal";
+import { nav, hero, TG_URL } from "@/lib/data";
 
 export default function Header() {
   const [shown, setShown] = useState(false);
-  const open = useLeadModal();
 
   useEffect(() => {
     const top = document.getElementById("top");
@@ -48,14 +46,15 @@ export default function Header() {
             </a>
           ))}
         </nav>
-        <button
-          type="button"
-          onClick={open}
+        <a
+          href={TG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           tabIndex={shown ? 0 : -1}
           className="inline-flex h-10 items-center rounded-full bg-accent px-5 text-[14px] font-semibold text-white transition-colors hover:bg-accent-deep"
         >
           {hero.cta}
-        </button>
+        </a>
       </div>
     </header>
   );

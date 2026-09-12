@@ -7,14 +7,12 @@
   ниже три колонки на отступах 9.6%: соцсети подчёркнутыми ссылками (шаг 44.6) / телефон и почта по центру (шаг 44.6) /
   навигация справа (шаг 33). Внизу по центру кнопка 229×63 с обводкой 1px без заливки. Добавлена строка © (по заданию).
 */
-import { footer } from "@/lib/data";
-import { useLeadModal } from "./LeadModal";
+import { footer, TG_URL } from "@/lib/data";
 
 const linkCls =
   "text-paper underline decoration-1 underline-offset-[5px] transition-opacity hover:opacity-70";
 
 export default function Footer() {
-  const open = useLeadModal();
   const year = new Date().getFullYear();
 
   return (
@@ -73,13 +71,14 @@ export default function Footer() {
         </div>
 
         <div className="mt-[40px] flex justify-center px-5 md:mt-[47px]">
-          <button
-            type="button"
-            onClick={open}
-            className="inline-flex h-[56px] w-[229px] cursor-pointer items-center justify-center border border-paper bg-transparent text-[16px] leading-none text-paper transition-colors hover:bg-paper hover:text-black md:h-[63px]"
+          <a
+            href={TG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-[56px] w-[229px] items-center justify-center rounded-full bg-accent text-[16px] leading-none text-white transition-colors hover:bg-accent-deep md:h-[63px]"
           >
             {footer.button}
-          </button>
+          </a>
         </div>
 
         <p className="mt-[28px] text-center text-[13px] leading-none text-paper-2">

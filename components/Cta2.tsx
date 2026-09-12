@@ -6,27 +6,26 @@
   (добавлен по комментарию клиента), ниже кнопка-пилюля 350×74 с текстом и стрелкой →.
   Замеры (1440): верх → верх заголовка 106, кнопка на 228 от верха, низ 147, высота блока ≈ 449.
 */
-import { cta2 } from "@/lib/data";
-import { useLeadModal } from "./LeadModal";
+import { cta2, TG_URL } from "@/lib/data";
 import Reveal from "./Reveal";
 
 export default function Cta2() {
-  const open = useLeadModal();
   return (
     <section
       id="cta2"
       className="scroll-mt-20 bg-cream-2 px-5 pt-[64px] pb-[88px] text-center md:pt-[100px] md:pb-[147px]"
     >
       <Reveal>
-        <h2 className="mx-auto max-w-[900px] font-sans text-[25px] leading-[1.2] font-normal tracking-[-0.01em] text-ink md:text-[36px]">
+        <h2 className="mx-auto max-w-[900px] font-serif text-[25px] leading-[1.2] font-normal tracking-[-0.01em] text-ink md:text-[36px]">
           {cta2.title}
         </h2>
         <p className="mx-auto mt-[12px] max-w-[520px] text-[15px] leading-[1.4] text-ink-2 md:mt-[16px] md:text-[16px]">
           {cta2.subtitle}
         </p>
-        <button
-          type="button"
-          onClick={open}
+        <a
+          href={TG_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-[32px] inline-flex h-[60px] cursor-pointer items-center justify-center gap-[20px] rounded-[var(--radius-pill)] bg-accent px-[48px] text-[21px] leading-none text-paper transition-colors hover:bg-accent-deep md:mt-[46px] md:h-[74px] md:gap-[27px] md:pr-[97px] md:pl-[93px] md:text-[26px]"
         >
           <span>{cta2.button}</span>
@@ -47,7 +46,7 @@ export default function Cta2() {
               strokeLinejoin="round"
             />
           </svg>
-        </button>
+        </a>
       </Reveal>
     </section>
   );

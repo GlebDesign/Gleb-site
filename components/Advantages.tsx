@@ -76,6 +76,7 @@ export default function Advantages() {
     },
     { scope: section },
   );
+  // Фикс на позднюю догрузку картинок (кейсы/фото сдвигают разметку) — см. SmoothScroll.tsx
 
   const trackViewBox = `0 0 ${Math.round(WAVE_W * TRACK)} ${WAVE_H}`;
 

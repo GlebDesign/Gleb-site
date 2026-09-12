@@ -4,6 +4,7 @@
   Упрощение: точные позиции плавающих лейблов не мерили пиксель-в-пиксель (референс — другой проект,
   число/длина реальных цитат клиента другие) — сделаны свободным облаком вокруг заголовка.
 */
+import Image from "next/image";
 import Reveal from "./Reveal";
 import { reviews } from "@/lib/data";
 
@@ -11,21 +12,28 @@ function Quote({ item, i }: { item: (typeof reviews.items)[number]; i: number })
   return (
     <Reveal delay={(i % 3) * 0.06} className="h-full">
       <article className="flex h-full flex-col rounded-[var(--radius-card)] bg-cream-2 p-6 md:p-7">
-        <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden className="text-accent">
-          <path
-            d="M0 20V11.6C0 4.6 4.3 0.8 11.2 0L12 3.6C7.8 4.7 6 7.3 6 11.2H11.2V20H0ZM16 20V11.6C16 4.6 20.3 0.8 27.2 0L28 3.6C23.8 4.7 22 7.3 22 11.2H27.2V20H16Z"
-            fill="currentColor"
-          />
-        </svg>
-
         {item.video ? (
-          <div className="mt-4">
+          <div className="mt-1">
             <video controls preload="none" className="w-full rounded-[calc(var(--radius-card)-8px)] bg-black">
               <source src="/reviews/video-review.mp4" />
             </video>
           </div>
+        ) : item.image ? (
+          // Скрины разных пропорций (от чат-бабла 4:1 до портретного 0.6:1) — object-contain,
+          // чтобы текст отзыва не обрезался по краям ради заполнения рамки.
+          <div className="relative h-[220px] w-full overflow-hidden rounded-[calc(var(--radius-card)-8px)] bg-ink/5">
+            <Image src={item.image} alt={`Отзыв: ${item.name}`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-contain" />
+          </div>
         ) : (
-          <p className="mt-4 flex-1 text-[15px] leading-[1.45] text-ink">{item.text}</p>
+          <>
+            <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden className="text-accent">
+              <path
+                d="M0 20V11.6C0 4.6 4.3 0.8 11.2 0L12 3.6C7.8 4.7 6 7.3 6 11.2H11.2V20H0ZM16 20V11.6C16 4.6 20.3 0.8 27.2 0L28 3.6C23.8 4.7 22 7.3 22 11.2H27.2V20H16Z"
+                fill="currentColor"
+              />
+            </svg>
+            <p className="mt-4 flex-1 text-[15px] leading-[1.45] text-ink">{item.text}</p>
+          </>
         )}
 
         <div className="mt-6">

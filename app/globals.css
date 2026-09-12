@@ -29,8 +29,8 @@
   --color-line: rgba(17, 17, 17, 0.14);
   --color-line-dark: rgba(244, 242, 236, 0.16);
 
-  /* Шрифты — единый Playfair Display на весь сайт (font-sans = font-serif) */
-  --font-sans: var(--font-serif-display), "Times New Roman", Georgia, serif;
+  /* Шрифты: заголовки — Playfair Display (--font-serif), наборный текст — Inter Tight (--font-sans) */
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-serif-display), "Times New Roman", Georgia, serif;
 
   /* Радиусы */
@@ -78,8 +78,10 @@ body {
   text-wrap: balance;
 }
 
-/* Заголовок-гротеск (блоки 2, 7, 9, 10) */
+/* Заголовок-гротеск (блоки 2, 7, 9, 10) — заголовок, поэтому остаётся на Playfair Display,
+   даже когда наборный текст переведён на Inter Tight */
 .h-sans {
+  font-family: var(--font-serif);
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.03em;

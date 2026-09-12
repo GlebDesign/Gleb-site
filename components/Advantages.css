@@ -108,6 +108,17 @@
 
 /* ---------- Десктоп: панель-пропорция, абсолютная раскладка, дорожка 141% ---------- */
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  /*
+    Баг (замечен клиентом): панель ниже её ограничена aspect-ratio и не на всю высоту экрана.
+    Пока GSAP держит секцию закреплённой (position:fixed), в пустых полях сверху/снизу
+    панели просвечивал следующий блок («Цена…») — секция сама должна закрывать весь экран.
+  */
+  .adv {
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+  }
   .adv-viewport {
     padding: 0;
     aspect-ratio: 1253 / 474;
