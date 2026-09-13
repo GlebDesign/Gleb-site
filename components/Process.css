@@ -30,16 +30,17 @@
 }
 
 /* Карточка: дизайн один в один как rs-card в блоке «Результат» — иконка сверху,
-   заголовок+текст снизу, cream-фон, без скругления, без стрелки (правка клиента) */
+   заголовок+текст снизу, cream-фон, без скругления, без стрелки (правка клиента).
+   Баг: фиксированная aspect-ratio + overflow:hidden обрезали длинный текст
+   («Вёрстка, SEO и аналитика» — самый длинный пункт). Высота теперь по контенту. */
 .pc-card {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
-  aspect-ratio: 595 / 472;
+  min-height: 260px;
   padding: 14px;
-  overflow: hidden;
   background: var(--color-cream);
   color: var(--color-ink);
 }
