@@ -61,7 +61,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  gap: 14px;
   padding: 14px;
   /* Фон карточки — как в блоке «Шесть шагов от разбора до запуска» (правка клиента) */
   background: var(--color-cream);
@@ -85,6 +85,7 @@
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.04em;
+  overflow-wrap: break-word;
   color: var(--color-ink);
 }
 
@@ -119,28 +120,29 @@
     margin: 0;
   }
   .rs-card {
-    /* Было min(23.5vw,36vh) → min(27vw,40vh) (слишком крупно, нижний ряд обрезало по низу экрана
-       на невысоких окнах) → подобрано умеренное увеличение без обрезки. */
-    --rs-card: min(25vw, 33vh);
+    /* Пропорция карточки (595/472) и типографика — один в один как в блоке «Пять шагов»
+       (правка клиента: раньше карточки были другой формы и с другим размером текста). */
+    --rs-card: min(33vw, 44vh);
+    --rs-card-h: calc(var(--rs-card) * 472 / 595);
     position: absolute;
-    container-type: inline-size;
     width: var(--rs-card);
-    height: auto;
-    min-height: var(--rs-card);
-    padding: calc(var(--rs-card) * 0.0425);
+    height: var(--rs-card-h);
+    padding: 14px;
+    overflow: hidden;
     transform: translateY(115vh); /* стартовое положение до инициализации GSAP */
   }
   /* позиции из источника: c1 (100u; 90u), c2 (816u; 140u), c3 (458u; 340u); c4/c5 — добавлены под c1/c2 */
   .rs-card:nth-child(1) { left: 8.33vw;  top: calc(90 * 100vw / 1200); z-index: 1; }
   .rs-card:nth-child(2) { left: 68vw;    top: calc(140 * 100vw / 1200); z-index: 2; }
   .rs-card:nth-child(3) { left: 38.17vw; top: calc(340 * 100vw / 1200); z-index: 3; }
-  .rs-card:nth-child(4) { left: 8.33vw;  top: calc(90 * 100vw / 1200 + var(--rs-card) + 24px); z-index: 4; }
-  .rs-card:nth-child(5) { left: 68vw;    top: calc(140 * 100vw / 1200 + var(--rs-card) + 24px); z-index: 5; }
+  .rs-card:nth-child(4) { left: 8.33vw;  top: calc(90 * 100vw / 1200 + var(--rs-card-h) + 24px); z-index: 4; }
+  .rs-card:nth-child(5) { left: 68vw;    top: calc(140 * 100vw / 1200 + var(--rs-card-h) + 24px); z-index: 5; }
 
-  /* Размеры увеличены по правке клиента, чтобы соответствовать заголовкам/тексту карточек на всём сайте */
-  .rs-icon { width: 10cqw; height: 10cqw; }
-  .rs-card-title { font-size: 8.4cqw; }
-  .rs-card-text { font-size: 5.1cqw; line-height: 1.15; margin-top: 2.7cqw; }
+  /* Флэт-размеры вместо cqw-скейла — те же значения, что в .pc-icon/.pc-h/.pc-text блока «Пять шагов»
+     (там тоже 37px только от 768px, здесь пин целиком начинается с 768px, так что сразу 37px) */
+  .rs-icon { width: 34px; height: 34px; }
+  .rs-card-title { font-size: 37px; }
+  .rs-card-text { font-size: 14px; line-height: 1.25; margin-top: 6px; }
   .rs-approach { font-size: 1.1vw; margin-top: 1.5vw; }
 }
 
