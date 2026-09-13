@@ -119,9 +119,9 @@
     margin: 0;
   }
   .rs-card {
-    /* Увеличено по правке клиента (было min(23.5vw,36vh)) — карточки и типографика в них
-       были заметно мельче, чем везде на сайте. Типографика — в cqw от карточки, растёт вместе с ней. */
-    --rs-card: min(27vw, 40vh);
+    /* Было min(23.5vw,36vh) → min(27vw,40vh) (слишком крупно, нижний ряд обрезало по низу экрана
+       на невысоких окнах) → подобрано умеренное увеличение без обрезки. */
+    --rs-card: min(25vw, 33vh);
     position: absolute;
     container-type: inline-size;
     width: var(--rs-card);
@@ -138,9 +138,9 @@
   .rs-card:nth-child(5) { left: 68vw;    top: calc(140 * 100vw / 1200 + var(--rs-card) + 24px); z-index: 5; }
 
   /* Размеры увеличены по правке клиента, чтобы соответствовать заголовкам/тексту карточек на всём сайте */
-  .rs-icon { width: 11cqw; height: 11cqw; }
-  .rs-card-title { font-size: 9.2cqw; }
-  .rs-card-text { font-size: 5.6cqw; line-height: 1.15; margin-top: 2.7cqw; }
+  .rs-icon { width: 10cqw; height: 10cqw; }
+  .rs-card-title { font-size: 8.4cqw; }
+  .rs-card-text { font-size: 5.1cqw; line-height: 1.15; margin-top: 2.7cqw; }
   .rs-approach { font-size: 1.1vw; margin-top: 1.5vw; }
 }
 

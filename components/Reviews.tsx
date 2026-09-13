@@ -12,7 +12,14 @@ function Quote({ item, i }: { item: (typeof reviews.items)[number]; i: number })
   return (
     <Reveal delay={(i % 3) * 0.06} className="mb-4 block break-inside-avoid">
       {item.video ? (
-        <video controls preload="none" className="w-full bg-black">
+        // Вертикальная пропорция (9:16) + preload="metadata" — браузер сам покажет первый
+        // кадр как превью, без отдельного файла-постера.
+        <video
+          controls
+          preload="metadata"
+          playsInline
+          className="aspect-[9/16] w-full bg-black object-cover"
+        >
           <source src="/reviews/video-review.mp4" />
         </video>
       ) : item.image && item.imageWidth && item.imageHeight ? (

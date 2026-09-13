@@ -29,16 +29,31 @@
   min-width: 0;
 }
 
-/* Карточка: 595×472 (2x) → пропорция 1.26, без скругления, поле 14px */
+/* Карточка: дизайн один в один как rs-card в блоке «Результат» — иконка сверху,
+   заголовок+текст снизу, cream-фон, без скругления, без стрелки (правка клиента) */
 .pc-card {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
   aspect-ratio: 595 / 472;
-  padding: 14px 14px 12px;
+  padding: 14px;
   overflow: hidden;
   background: var(--color-cream);
   color: var(--color-ink);
+}
+
+.pc-icon {
+  display: block;
+  width: 34px;
+  height: 34px;
+  color: var(--color-accent);
+}
+.pc-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* Заголовок этапа: Playfair Display, размер повторяет заголовки колонок блока 2 (Problems) — правка клиента, без капса */
@@ -52,27 +67,11 @@
   overflow-wrap: break-word;
 }
 
-/* Подтекст: снизу слева (клиент), не наезжает на стрелку */
 .pc-text {
-  margin-top: auto;
-  padding-top: 20px;
-  max-width: calc(100% - 44px);
+  margin-top: 8px;
   font-size: 14px;
   line-height: 1.3;
   color: var(--color-ink-2);
-}
-
-/* Стрелка ↗: 32px (2x) → 18px, линия 2.5px, отступ 12px */
-.pc-arrow {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  stroke-linecap: square;
 }
 
 @media (min-width: 768px) {

@@ -38,12 +38,12 @@ export default function Pricing() {
                 <p className={`${capCls} mx-auto mt-3 max-w-[560px]`}>{pricing.marketCaption}</p>
               </div>
 
-              {/* TODO: скриншоты с бирж — клиент пришлёт отдельно */}
-              <div className="mt-auto grid grid-cols-3 gap-2.5 px-4 pt-6 md:gap-3 md:px-6 md:pt-8">
+              {/* Один скрин рынка вместо трёх (правка клиента) — TODO: файл ждём отдельно */}
+              <div className="mt-auto px-4 pt-6 md:px-6 md:pt-8">
                 {pricing.marketShots.map((label) => (
                   <div
                     key={label}
-                    className="ph h-[220px] rounded-t-[14px] md:h-[280px] md:rounded-t-[18px]"
+                    className="ph h-[260px] rounded-t-[14px] md:h-[340px] md:rounded-t-[18px]"
                     data-label={label}
                   />
                 ))}
