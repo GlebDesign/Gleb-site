@@ -8,12 +8,12 @@
   padding-block: 40px;
 }
 
-/* Заголовок: капитель 31px → 49px, центр, 2 строки */
+/* Заголовок: размер как у блока «Результат» (rs-title) — правка клиента */
 .pc-title {
   margin-inline: auto;
-  max-width: 720px;
+  max-width: 900px;
   text-align: center;
-  font-size: 34px;
+  font-size: clamp(40px, 10.4vw, 44px);
 }
 
 .pc-grid {
@@ -79,7 +79,7 @@
     padding-block: 22px 24px;
   }
   .pc-title {
-    font-size: 49px;
+    font-size: clamp(72px, 6.11vw, 98px);
   }
   .pc-grid {
     margin-top: 28px;

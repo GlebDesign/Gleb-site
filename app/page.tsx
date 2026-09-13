@@ -7,7 +7,6 @@ import Pricing from "@/components/Pricing";
 import Audit from "@/components/Audit";
 import About from "@/components/About";
 import Reviews from "@/components/Reviews";
-import Advantages from "@/components/Advantages";
 import Process from "@/components/Process";
 import Cta2 from "@/components/Cta2";
 import Footer from "@/components/Footer";
@@ -27,7 +26,6 @@ export default function Page() {
         <Audit />       {/* 6 */}
         <About />       {/* 7 */}
         <Reviews />     {/* 8 */}
-        <Advantages />  {/* 9 */}
         <Process />     {/* 10 */}
         <Cta2 />        {/* 11 */}
       </main>
