@@ -1,27 +1,19 @@
 /*
-  Блок 3 «Решения, которые приносят деньги».
-  Референс: docs/refs/block-03-results-{a,b,c}.png, источник анимации — iampolie.ru (Tilda Zero, сетка 1200).
-  Единица u = 1/1200 ширины окна (артборд референса растягивается на окно), 1440px → u = 1.2px.
+  Блок 3 «Решения, которые приносят деньги». Обычная сетка вместо GSAP-пина с абсолютным
+  позиционированием — см. комментарий в Results.tsx, почему.
 */
 
 .rs {
-  position: relative;
-  overflow: hidden;
-  background: var(--color-black); /* референс #0d0d0d */
+  background: var(--color-black);
   color: var(--color-paper);
 }
 
-.rs-stage {
-  position: relative;
-  padding: 96px 20px 72px;
-}
-
-/* ── Заголовок ── референс: 70u, weight 500, lh 0.9, ls −6px, uppercase, #ffffef, лёгкое свечение */
 .rs-head {
   text-align: center;
   margin-inline: auto;
   max-width: 905px;
 }
+
 .rs-title {
   margin: 0;
   font-family: var(--font-serif);
@@ -33,12 +25,12 @@
   text-wrap: balance;
   color: var(--color-paper);
   text-shadow: 0 0 12px rgba(244, 242, 236, 0.35);
-  will-change: filter, transform, opacity;
 }
 @media (min-width: 768px) {
-  /* Увеличено по правке клиента — размер повторяет заголовок футера (та же clamp-шкала UI-кита) */
+  /* Размер повторяет заголовок футера (та же clamp-шкала UI-кита) — правка клиента */
   .rs-title { font-size: clamp(72px, 6.11vw, 98px); }
 }
+
 .rs-approach {
   margin: 20px auto 0;
   max-width: 520px;
@@ -48,117 +40,64 @@
   text-wrap: balance;
 }
 
-/* ── Карточки ── референс: 282u квадрат, фон #161616 @ 0.7 + backdrop blur 6px, без радиуса */
 .rs-cards {
-  list-style: none;
   margin: 40px 0 0;
   padding: 0;
+  list-style: none;
   display: grid;
   gap: 12px;
 }
+@media (min-width: 640px) {
+  .rs-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .rs-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 56px; }
+}
+
+.rs-cell {
+  min-width: 0;
+}
+
+/* Карточка — тот же дизайн, что .pc-card в блоке «Пять шагов»: иконка сверху,
+   заголовок+текст снизу, высота по контенту (никакого overflow:hidden/фиксированной
+   пропорции — именно это раньше обрезало длинный текст). */
 .rs-card {
-  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 14px;
-  padding: 14px;
-  /* Фон карточки — как в блоке «Шесть шагов от разбора до запуска» (правка клиента) */
+  gap: 20px;
+  min-height: 220px;
+  padding: 20px;
   background: var(--color-cream);
   color: var(--color-ink);
-  min-height: 180px;
 }
 
 .rs-icon {
   display: block;
-  width: 34px; /* увеличена по правке клиента */
+  width: 34px;
   height: 34px;
   color: var(--color-accent);
 }
 .rs-icon svg { width: 100%; height: 100%; display: block; }
 
-/* крупная строка: Playfair Display (правка клиента — заголовки карточек везде на сайте одним шрифтом) */
 .rs-card-title {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   overflow-wrap: break-word;
   color: var(--color-ink);
 }
+@media (min-width: 768px) {
+  .rs-card-title { font-size: 37px; } /* как .pc-h — правка клиента, размер один в один */
+}
 
-/* мелкий текст: 14u, weight 300, lh 1 */
 .rs-card-text {
   margin: 8px 0 0;
   font-size: 14px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.3;
   color: var(--color-ink-2);
-}
-
-/* ── Десктоп без reduced-motion: закреплённая сцена, абсолютная раскладка референса ── */
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  .rs-stage {
-    height: 100vh;
-    height: 100svh;
-    padding: 0;
-  }
-  .rs-head {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: min(905px, 63vw);
-    max-width: none;
-    transform: translate(-50%, -50%);
-  }
-  .rs-cards {
-    position: absolute;
-    inset: 0;
-    display: block;
-    margin: 0;
-  }
-  .rs-card {
-    /* Баг: высота считалась строго из ширины через пропорцию 595/472 и на части экранов
-       была ниже, чем нужно самому длинному тексту («Сайт не стыдно показать партнёру и
-       крупному заказчику») — с overflow:hidden текст обрезался молча. Высота теперь
-       отдельная переменная с жёстким минимумом (260px — хватает под 3 строки заголовка
-       + 3 строки текста в худшем случае), overflow:hidden убран как страховка. */
-    --rs-card: min(33vw, 40vh);
-    --rs-card-h: max(285px, calc(var(--rs-card) * 0.82));
-    position: absolute;
-    width: var(--rs-card);
-    height: var(--rs-card-h);
-    padding: 14px;
-    transform: translateY(115vh); /* стартовое положение до инициализации GSAP */
-  }
-  /* позиции из источника: c1 (100u; 90u), c2 (816u; 140u), c3 (458u; 340u); c4/c5 — добавлены под c1/c2 */
-  .rs-card:nth-child(1) { left: 8.33vw;  top: calc(90 * 100vw / 1200); z-index: 1; }
-  .rs-card:nth-child(2) { left: 68vw;    top: calc(140 * 100vw / 1200); z-index: 2; }
-  .rs-card:nth-child(3) { left: 38.17vw; top: calc(340 * 100vw / 1200); z-index: 3; }
-  .rs-card:nth-child(4) { left: 8.33vw;  top: calc(90 * 100vw / 1200 + var(--rs-card-h) + 24px); z-index: 4; }
-  .rs-card:nth-child(5) { left: 68vw;    top: calc(140 * 100vw / 1200 + var(--rs-card-h) + 24px); z-index: 5; }
-
-  /* Флэт-размеры вместо cqw-скейла — те же значения, что в .pc-icon/.pc-h/.pc-text блока «Пять шагов»
-     (там тоже 37px только от 768px, здесь пин целиком начинается с 768px, так что сразу 37px) */
-  .rs-icon { width: 34px; height: 34px; }
-  .rs-card-title { font-size: 37px; }
-  .rs-card-text { font-size: 14px; line-height: 1.25; margin-top: 6px; }
-  .rs-approach { font-size: 1.1vw; margin-top: 1.5vw; }
-}
-
-/* ── Десктоп с reduced-motion: статичная раскладка, заголовок сверху, карточки сеткой ── */
-@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
-  .rs-stage { padding: 120px 40px 100px; }
-  .rs-cards {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 64px;
-    max-width: 1280px;
-    margin-inline: auto;
-  }
-  .rs-card { aspect-ratio: 1; padding: 20px; }
-  .rs-card-title { font-size: 24px; }
-  .rs-card-text { font-size: 15px; }
 }

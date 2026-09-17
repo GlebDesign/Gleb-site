@@ -1,19 +1,15 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Reveal from "./Reveal";
 import { results } from "@/lib/data";
 import "./Results.css";
 
 /*
-  Блок 3. Скролл-анимация по референсу iampolie.ru (docs/refs/block-03-results-{a,b,c}.png):
-  секция закреплена; заголовок сначала один по центру, затем чуть отходит назад и размывается,
-  карточки по очереди выезжают снизу на свои места (лево-верх → право-верх → центр-низ → лево-низ → право-низ).
-  Тайминги сняты с источника (артборд 2395u: блюр 0→700u, карточки фиксируются на 778u / 1079u / 1388u).
+  Блок 3 «Решения, которые приносят деньги».
+  Было: карточки на GSAP-пине с абсолютным позиционированием по референсу iampolie.ru —
+  постоянно ломалось (текст либо переносился не туда, либо карточку обрезало по низу экрана,
+  либо обрезался текст внутри самой карточки при разных пропорциях экрана). Правка клиента:
+  убрана вся пин-анимация, обычная сетка с высотой по контенту — как в блоке «Пять шагов»,
+  там с той же типографикой такого бага никогда не было.
 */
-
-const PIN_DISTANCE = 3200; // px скролла, на которые закреплена сцена
 
 /* Тонкие линейные иконки по смыслу карточек (stroke = currentColor) */
 const ICONS = [
@@ -40,82 +36,28 @@ const ICONS = [
 ];
 
 export default function Results() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-      const title = section.querySelector<HTMLElement>(".rs-title");
-      const approach = section.querySelector<HTMLElement>(".rs-approach");
-      const cards = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".rs-card"));
-
-      gsap.set(cards, { y: "115vh" });
-
-      const tl = gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: `+=${PIN_DISTANCE}`,
-          pin: true,
-          scrub: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // кадр A → B: заголовок отходит назад и размывается (источник: overlay-блюр 0→700u из 2395u ≈ 0.16–0.44)
-      tl.fromTo(
-        title,
-        { filter: "blur(0px)", scale: 1, opacity: 1 },
-        { filter: "blur(7px)", scale: 0.9, opacity: 0.85, duration: 0.28 },
-        0.16,
-      );
-      if (approach) tl.to(approach, { opacity: 0, duration: 0.1 }, 0.16);
-
-      // карточки выезжают снизу и встают на места; заезды перекрываются, как на источнике
-      cards.forEach((card, i) => {
-        tl.to(card, { y: 0, duration: 0.2 }, 0.26 + i * 0.14);
-      });
-
-      return () => {
-        tl.scrollTrigger?.kill();
-        tl.kill();
-      };
-    });
-
-    // после подгрузки шрифтов пересчитать позиции (доп. фикс на позднюю догрузку картинок — в SmoothScroll.tsx)
-    document.fonts?.ready.then(() => ScrollTrigger.refresh());
-
-    return () => {
-      mm.revert();
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === section) t.kill();
-      });
-    };
-  }, []);
-
   return (
-    <section id="results" ref={sectionRef} className="rs scroll-mt-20">
-      <div className="rs-stage">
-        <div className="rs-head">
-          <h2 className="rs-title">{results.title}</h2>
-          <p className="rs-approach">{results.approach}</p>
-        </div>
+    <section id="results" className="rs scroll-mt-20 py-20 md:py-28">
+      <div className="wrap">
+        <Reveal>
+          <div className="rs-head">
+            <h2 className="rs-title">{results.title}</h2>
+            <p className="rs-approach">{results.approach}</p>
+          </div>
+        </Reveal>
 
-        <ul className="rs-cards">
+        <ul className="rs-cards" role="list">
           {results.items.map((r, i) => (
-            <li key={r.title} className="rs-card">
-              <span className="rs-icon">{ICONS[i]}</span>
-              <div>
-                <h3 className="rs-card-title">{r.title}</h3>
-                <p className="rs-card-text">{r.text}</p>
-              </div>
+            <li key={r.title} className="rs-cell">
+              <Reveal delay={(i % 3) * 0.06} className="h-full">
+                <article className="rs-card">
+                  <span className="rs-icon">{ICONS[i]}</span>
+                  <div>
+                    <h3 className="rs-card-title">{r.title}</h3>
+                    <p className="rs-card-text">{r.text}</p>
+                  </div>
+                </article>
+              </Reveal>
             </li>
           ))}
         </ul>

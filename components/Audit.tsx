@@ -8,7 +8,7 @@ import { audit, TG_URL } from "@/lib/data";
   Замеры (CSS px): надзаголовок 18px по центру; заголовок-антиква в 2 строки по центру;
   текст 18px, интерлиньяж ~1.1, 2 строки; кнопка-пилюля 470×70 с горизонтальным градиентом
   (слева темнее, справа светлее), текст 19px; отступы: заголовок→текст 28, текст→кнопка 63,
-  кнопка→низ блока 55. Под кнопкой — тёплое радиальное свечение, центр на нижней кромке блока.
+  кнопка→низ блока 55. Свечение под кнопкой убрано по правке клиента.
   Кнопка ведёт в Telegram с готовым сообщением (правка клиента — не через форму на сайте).
 */
 
@@ -20,16 +20,6 @@ export default function Audit() {
       id="audit"
       className="relative scroll-mt-20 overflow-hidden bg-cream pt-16 pb-12 md:pt-[72px] md:pb-[55px]"
     >
-      {/* Свечение под кнопкой (в референсе — тёплый ореол, обрезанный нижней кромкой блока) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[260px] md:h-[340px]"
-        style={{
-          background:
-            "radial-gradient(ellipse 320px 330px at 50% 100%, var(--color-accent-soft) 0%, color-mix(in srgb, var(--color-accent-soft) 55%, transparent) 38%, transparent 76%)",
-        }}
-      />
-
       <div className="wrap relative text-center">
         <Reveal>
           <p className="text-[15px] text-ink-2 md:text-[18px]">{audit.kicker}</p>
