@@ -37,7 +37,6 @@ export default function Audit() {
           >
             {audit.cta}
           </a>
-          <p className="mt-3 text-[13px] text-ink-2">{audit.ctaNote}</p>
         </Reveal>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 import { pricing } from "@/lib/data";
 
@@ -38,15 +39,15 @@ export default function Pricing() {
                 <p className={`${capCls} mx-auto mt-3 max-w-[560px]`}>{pricing.marketCaption}</p>
               </div>
 
-              {/* Один скрин рынка вместо трёх (правка клиента) — TODO: файл ждём отдельно */}
+              {/* Один скрин рынка вместо трёх (правка клиента) */}
               <div className="mt-auto px-4 pt-6 md:px-6 md:pt-8">
-                {pricing.marketShots.map((label) => (
-                  <div
-                    key={label}
-                    className="ph h-[260px] rounded-t-[14px] md:h-[340px] md:rounded-t-[18px]"
-                    data-label={label}
-                  />
-                ))}
+                <Image
+                  src={pricing.marketShot.src}
+                  alt="Обзор от ИИ: разработка лендинга под ключ на рынке стоит от 60 000 до 150 000 ₽"
+                  width={pricing.marketShot.width}
+                  height={pricing.marketShot.height}
+                  className="h-auto w-full rounded-t-[14px] md:rounded-t-[18px]"
+                />
               </div>
             </article>
           </Reveal>
