@@ -20,7 +20,6 @@ export default function Footer() {
       id="contacts"
       className="relative scroll-mt-20 overflow-hidden bg-black pt-[28px] pb-[24px] text-paper md:pt-[19px]"
     >
-      {/* TODO: ассет «фон подвала» — фактура во весь блок (в референсе красный шёлк). Пока плейсхолдер-градиент. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -29,12 +28,6 @@ export default function Footer() {
             "radial-gradient(120% 90% at 50% 35%, var(--color-black-2) 0%, var(--color-black) 62%, #000000 100%)",
         }}
       />
-      <span
-        aria-hidden="true"
-        className="label pointer-events-none absolute top-2 left-3 text-[10px] text-paper/35"
-      >
-        TODO: фон подвала (фактура)
-      </span>
 
       <div className="relative">
         <h2 className="mx-auto px-5 text-center font-serif text-[clamp(38px,10.4vw,44px)] leading-[0.955] font-normal tracking-[-0.02em] text-paper uppercase [text-wrap:wrap] md:max-w-[max(640px,54vw)] md:text-[clamp(72px,6.11vw,98px)]">
